@@ -93,6 +93,8 @@ public class PlayerMovement : MonoBehaviour
       playeranimator.Play(currentWarzone.GetAnimationToPlay(), currentWarzone.GetAnimatorSpeed());
 
       Time.timeScale = slowMoScale;
+      Time.fixedDeltaTime = slowMoScale / 50;
+      
 
       playerIK.ConfigureIk(currentWarzone.GetIKTarget());
 
@@ -120,6 +122,7 @@ public class PlayerMovement : MonoBehaviour
       playeranimator.Play("Run", 1);
 
       Time.timeScale = 1;
+      Time.fixedDeltaTime = 1f / 50;
 
       onExitWarzone?.Invoke();
 

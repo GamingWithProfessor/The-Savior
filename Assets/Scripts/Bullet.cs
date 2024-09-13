@@ -1,11 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
     [Header(" Settings")]
+    [SerializeField] private LayerMask enemiesMask;
+    [SerializeField] private float detectionRadius;
     private Vector3 velocity;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -16,6 +20,7 @@ public class Bullet : MonoBehaviour
     void Update()
     {
         Move();
+        CheckForEnemies();
     }
 
     private void Move()
@@ -26,5 +31,14 @@ public class Bullet : MonoBehaviour
     public void Configure(Vector3 velocity)
     {
         this.velocity = velocity;
+    }
+
+    public void CheckForEnemies()
+    {
+        Collider[] detectedEnemies = Physics.OverlapSphere(transform.position, detectionRadius, enemiesMask);
+        foreach (Collider enemyCollider in detectedEnemies)
+        {
+            enemyCollider.GetComponent<Enemy>().TakeDamage();
+        }
     }
 }

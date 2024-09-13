@@ -46,6 +46,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a38c92fbfeb857149a9a0282ba7c4484, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemiesMask:
+    serializedVersion: 2
+    m_Bits: 64
+  detectionRadius: 0.15
 --- !u!1 &3933103418435314499
 GameObject:
   m_ObjectHideFlags: 0
