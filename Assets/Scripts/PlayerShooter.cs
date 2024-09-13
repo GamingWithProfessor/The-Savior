@@ -8,9 +8,7 @@ public class PlayerShooter : MonoBehaviour
     [Header ("Elements")] 
     [SerializeField] private GameObject shootingLine;
     [SerializeField] private Bullet bulletPrefab;
-
     [SerializeField] private Transform bulletsParent;
-
     [SerializeField] private Transform bulletSpawnPosition;
 
     [Header("Setting")]
@@ -50,9 +48,11 @@ public class PlayerShooter : MonoBehaviour
 
     private void Shoot()
     {
-        Bullet bulletInstance = Instantiate(bulletPrefab, bulletSpawnPosition.position, Quaternion.identity, bulletsParent);
+        Vector3 direction = bulletSpawnPosition.right;
+        direction.z = 0;
 
-        bulletInstance.Configure(bulletSpawnPosition.right * bulletSpeed);
+        Bullet bulletInstance = Instantiate(bulletPrefab, bulletSpawnPosition.position, Quaternion.identity, bulletsParent);
+        bulletInstance.Configure(direction * bulletSpeed);
     }
 
     private void EnteredWarzoneCallback()
