@@ -3354,7 +3354,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
-  slowMoScale: 1
+  slowMoScale: 0.3
   Framerate: 120
   playeranimator: {fileID: 1950442813}
   playerIK: {fileID: 1950442814}
