@@ -9,11 +9,16 @@ public class Enemy : MonoBehaviour
 
     [Header(" Elements ")]
     [SerializeField] private CharacterRagdoll characterRagdoll;
+    [SerializeField] private CharacterIK characterIK;
+    private PlayerMovement playerMovement;
 
     // Start is called before the first frame update
     void Start()
     {
         state = State.Alive;
+
+        playerMovement = FindObjectOfType<PlayerMovement>();
+        characterIK.ConfigureIk(playerMovement.GetEnemyTarget());
     }
 
     // Update is called once per frame

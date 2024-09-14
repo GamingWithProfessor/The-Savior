@@ -12,6 +12,7 @@ public class PlayerMovement : MonoBehaviour
     [Header ("Settings")]
     [SerializeField] private float moveSpeed;
     [SerializeField] private float slowMoScale;
+    [SerializeField] private Transform enemyTarget;
 
     [Header ("Testing")]
     [SerializeField] private int Framerate;
@@ -19,7 +20,7 @@ public class PlayerMovement : MonoBehaviour
 
     [Header ("Elemets")]
     [SerializeField] private PlayerAnimator playeranimator;
-    [SerializeField] private PlayerIK playerIK;
+    [SerializeField] private CharacterIK playerIK;
     
 
     private State state;
@@ -31,8 +32,6 @@ public class PlayerMovement : MonoBehaviour
     [Header ("Actions")]
     public static Action onEnterWarzone;
     public static Action onExitWarzone;
-
-
 
     void Start()
     {
@@ -128,5 +127,10 @@ public class PlayerMovement : MonoBehaviour
 
       playerIK.DisableIk();
 
+    }
+
+    public Transform GetEnemyTarget()
+    {
+      return enemyTarget;
     }
 }

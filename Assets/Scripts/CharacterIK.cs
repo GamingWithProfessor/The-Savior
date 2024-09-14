@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
 
-public class PlayerIK : MonoBehaviour
+public class CharacterIK : MonoBehaviour
 {
     [SerializeField] public RigBuilder rigBuilder;
 

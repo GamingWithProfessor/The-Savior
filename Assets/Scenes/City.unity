@@ -422,7 +422,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Weight: 1
   m_Data:
-    m_ConstrainedObject: {fileID: 7686803557533871300}
+    m_ConstrainedObject: {fileID: 2512060687753570791}
     m_SourceObjects:
       m_Length: 1
       m_Item0:
@@ -730,9 +730,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Weight: 1
   m_Data:
-    m_Root: {fileID: 8805965783768393919}
-    m_Mid: {fileID: 5050595176633982784}
-    m_Tip: {fileID: 4794217128890999913}
+    m_Root: {fileID: 3622215439830478236}
+    m_Mid: {fileID: 1037784447678962275}
+    m_Tip: {fileID: 790902812071534922}
     m_Target: {fileID: 0}
     m_Hint: {fileID: 0}
     m_TargetPositionWeight: 1
@@ -764,6 +764,7 @@ GameObject:
   m_Component:
   - component: {fileID: 429003037}
   - component: {fileID: 429003038}
+  - component: {fileID: 429003039}
   m_Layer: 0
   m_Name: Enemy Animator
   m_TagString: Untagged
@@ -810,6 +811,30 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &429003039
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 429003036}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fff0960ef4ea6e04eac66b4a7fd2189d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RigLayers:
+  - m_Rig: {fileID: 1683075084}
+    m_Active: 1
+  - m_Rig: {fileID: 424751890}
+    m_Active: 0
+  - m_Rig: {fileID: 232681090}
+    m_Active: 1
+  - m_Rig: {fileID: 1064518342}
+    m_Active: 0
+  - m_Rig: {fileID: 1455199353}
+    m_Active: 1
+  m_Effectors: []
 --- !u!1001 &565810376
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1591,7 +1616,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 46.82
+  field of view: 70
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -1842,7 +1867,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Weight: 1
   m_Data:
-    m_ConstrainedObject: {fileID: 4794217128890999913}
+    m_ConstrainedObject: {fileID: 790902812071534922}
     m_SourceObjects:
       m_Length: 1
       m_Item0:
@@ -2099,43 +2124,43 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3263699454365990613, guid: 748d19574625db444877ca05561b6aea, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.000113
+      value: 0.000171
       objectReference: {fileID: 0}
     - target: {fileID: 3263699454365990613, guid: 748d19574625db444877ca05561b6aea, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.001292
+      value: 0.001234
       objectReference: {fileID: 0}
     - target: {fileID: 3263699454365990613, guid: 748d19574625db444877ca05561b6aea, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.000484
+      value: 0.000415
       objectReference: {fileID: 0}
     - target: {fileID: 3263699454365990613, guid: 748d19574625db444877ca05561b6aea, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.5180172
+      value: 0.42499962
       objectReference: {fileID: 0}
     - target: {fileID: 3263699454365990613, guid: 748d19574625db444877ca05561b6aea, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.47807515
+      value: 0.5411974
       objectReference: {fileID: 0}
     - target: {fileID: 3263699454365990613, guid: 748d19574625db444877ca05561b6aea, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.23015551
+      value: 0.56527495
       objectReference: {fileID: 0}
     - target: {fileID: 3263699454365990613, guid: 748d19574625db444877ca05561b6aea, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.6709178
+      value: 0.45491207
       objectReference: {fileID: 0}
     - target: {fileID: 3263699454365990613, guid: 748d19574625db444877ca05561b6aea, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 10.747
+      value: -3.112
       objectReference: {fileID: 0}
     - target: {fileID: 3263699454365990613, guid: 748d19574625db444877ca05561b6aea, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 63.593
+      value: 103.014
       objectReference: {fileID: 0}
     - target: {fileID: 3263699454365990613, guid: 748d19574625db444877ca05561b6aea, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 111.331
+      value: 89.982
       objectReference: {fileID: 0}
     - target: {fileID: 3263699454365990613, guid: 748d19574625db444877ca05561b6aea, type: 3}
       propertyPath: m_ConstrainProportionsScale
@@ -2203,7 +2228,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Weight: 1
   m_Data:
-    m_ConstrainedObject: {fileID: 7673374708520940541}
+    m_ConstrainedObject: {fileID: 2453599080847177438}
     m_SourceObjects:
       m_Length: 1
       m_Item0:
@@ -2869,7 +2894,7 @@ MonoBehaviour:
   m_LookAt: {fileID: 1950442811}
   m_Follow: {fileID: 1950442811}
   m_Lens:
-    FieldOfView: 46.82
+    FieldOfView: 70
     OrthographicSize: 5
     NearClipPlane: 0.3
     FarClipPlane: 1000
@@ -2934,9 +2959,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Weight: 1
   m_Data:
-    m_Root: {fileID: 2823895681741097632}
-    m_Mid: {fileID: 6881137257719123382}
-    m_Tip: {fileID: 7686803557533871300}
+    m_Root: {fileID: 8016931597913001859}
+    m_Mid: {fileID: 1661572187620395157}
+    m_Tip: {fileID: 2512060687753570791}
     m_Target: {fileID: 0}
     m_Hint: {fileID: 0}
     m_TargetPositionWeight: 1
@@ -3355,7 +3380,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
-  slowMoScale: 0.3
+  slowMoScale: 0.4
+  enemyTarget: {fileID: 6385157721506159670}
   Framerate: 120
   playeranimator: {fileID: 1950442813}
   playerIK: {fileID: 1950442814}
@@ -6756,6 +6782,7 @@ GameObject:
   - component: {fileID: 7589428879240462394}
   - component: {fileID: 7589428879240462395}
   - component: {fileID: 7589428879240462396}
+  - component: {fileID: 7589428879240462397}
   m_Layer: 6
   m_Name: Enemy
   m_TagString: Untagged
@@ -6799,6 +6826,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterRagdoll: {fileID: 7589428879240462396}
+  characterIK: {fileID: 7589428879240462397}
 --- !u!114 &7589428879240462396
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6826,6 +6854,26 @@ MonoBehaviour:
   - {fileID: 8016931597913001860}
   - {fileID: 8038868936149663087}
   ragdollForce: 5000
+--- !u!114 &7589428879240462397
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7589428879240462393}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e50488133f1e74847acfeb7b82ff515a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rigBuilder: {fileID: 429003039}
+  twoBoneIKConstraint:
+  - {fileID: 1683075083}
+  - {fileID: 424751889}
+  multiAimConstraint:
+  - {fileID: 232681089}
+  - {fileID: 1064518341}
+  - {fileID: 1455199352}
 --- !u!1 &7611114263580811289
 GameObject:
   m_ObjectHideFlags: 0
