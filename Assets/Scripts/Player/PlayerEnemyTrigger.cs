@@ -8,9 +8,10 @@ public class PlayerEnemyTrigger : MonoBehaviour
     [SerializeField] private LineRenderer shootingLine;
 
     [Header(" Settings ")]
+    [SerializeField] private LayerMask enemiesMask;
     private bool canCheckForShootingEnemies;
     private List<Enemy> currentEnemies = new List<Enemy>();
-    [SerializeField] private LayerMask enemiesMask;
+    
 
     // Start is called before the first frame update
 
@@ -52,8 +53,8 @@ public class PlayerEnemyTrigger : MonoBehaviour
     private void CheckForShootingEnemies()
     {
         // world space ray origin
-        Vector3 rayOrigin = shootingLine.transform.TransformVector(shootingLine.GetPosition(0));
-        Vector3 worldSpaceSecondPoint = shootingLine.transform.TransformVector(shootingLine.GetPosition(1));
+        Vector3 rayOrigin = shootingLine.transform.TransformPoint(shootingLine.GetPosition(0));
+        Vector3 worldSpaceSecondPoint = shootingLine.transform.TransformPoint(shootingLine.GetPosition(1));
 
         Vector3 rayDirection = (worldSpaceSecondPoint - rayOrigin).normalized;
         float maxDistance = Vector3.Distance(rayOrigin, worldSpaceSecondPoint);
