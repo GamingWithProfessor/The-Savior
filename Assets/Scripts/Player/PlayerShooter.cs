@@ -19,14 +19,16 @@ public class PlayerShooter : MonoBehaviour
     {
         PlayerMovement.onEnterWarzone += EnteredWarzoneCallback;
         PlayerMovement.onExitWarzone += ExitWarZone;
+        PlayerMovement.onDied += DiedCallback;
     }
 
     private void OnDestroy() 
-        
     {
         PlayerMovement.onEnterWarzone -= EnteredWarzoneCallback;
         PlayerMovement.onExitWarzone -= ExitWarZone;
+        PlayerMovement.onDied -= DiedCallback;
     }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -37,13 +39,17 @@ public class PlayerShooter : MonoBehaviour
     void Update()
     {
         if (canShoot)
-        ManageShooting();
+        {
+            ManageShooting();
+        }
     }
  
     private void ManageShooting()
     {
-      if (Input.GetMouseButtonDown(0))
-      Shoot();
+        if (Input.GetMouseButtonDown(0))
+        {
+            Shoot();
+        }
     }
 
     private void Shoot()
@@ -57,8 +63,8 @@ public class PlayerShooter : MonoBehaviour
 
     private void EnteredWarzoneCallback()
     {
-      SetShootingVisibility(true);
-      canShoot = true;
+        SetShootingVisibility(true);
+        canShoot = true;
     }
 
     private void ExitWarZone()
@@ -70,5 +76,10 @@ public class PlayerShooter : MonoBehaviour
     private void SetShootingVisibility(bool visibility)
     {
         shootingLine.SetActive(visibility);
+    } 
+
+    private void DiedCallback()
+    {
+        SetShootingVisibility(false);
     }
 }
