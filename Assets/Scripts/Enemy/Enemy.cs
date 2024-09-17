@@ -8,6 +8,7 @@ public class Enemy : MonoBehaviour
     private State state;
 
     [Header(" Elements ")]
+    [SerializeField] private EnemyShooter enemyshooter;
     [SerializeField] private CharacterRagdoll characterRagdoll;
     [SerializeField] private CharacterIK characterIK;
     private PlayerMovement playerMovement;
@@ -44,6 +45,11 @@ public class Enemy : MonoBehaviour
 
     public void ShootAtPlayer()
     {
-        Debug.Log("Shooting At Player");
+       if (state == State.Dead)   
+           return;
+
+        enemyshooter.TryShooting();
     }
+
+
 }

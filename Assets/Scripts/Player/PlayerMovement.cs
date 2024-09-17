@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.Splines;
 
 public class PlayerMovement : MonoBehaviour
-{ enum State {Idle, Run, Warzone }
+{ enum State {Idle, Run, Warzone, Dead }
 
 
     [Header ("Settings")]
@@ -21,6 +21,7 @@ public class PlayerMovement : MonoBehaviour
     [Header ("Elemets")]
     [SerializeField] private PlayerAnimator playeranimator;
     [SerializeField] private CharacterIK playerIK;
+    [SerializeField] private CharacterRagdoll characterRagdoll;
     
 
     private State state;
@@ -32,6 +33,8 @@ public class PlayerMovement : MonoBehaviour
     [Header ("Actions")]
     public static Action onEnterWarzone;
     public static Action onExitWarzone;
+
+    public static Action onDied;
 
     void Start()
     {
@@ -132,5 +135,16 @@ public class PlayerMovement : MonoBehaviour
     public Transform GetEnemyTarget()
     {
       return enemyTarget;
+    }
+
+    public void TakeDamage()
+    {
+      state = State.Dead;
+      characterRagdoll.Ragdollify();
+
+      Time.timeScale = 1;
+      Time.fixedDeltaTime = 1f / 50;
+      
+      onDied?.Invoke(); 
     }
 }
