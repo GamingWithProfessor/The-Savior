@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CharacterRagdoll : MonoBehaviour
 {
-    [Header(" Elements ")]    
+    [Header(" Elements ")]
     [SerializeField] private Animator animator;
     [SerializeField] private Collider mainCollider;
     [SerializeField] private Rigidbody[] rigidbodies;
@@ -15,10 +15,8 @@ public class CharacterRagdoll : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        foreach(Rigidbody rig in rigidbodies)
-        {
-            rig.isKinematic = true ;
-        }
+        foreach (Rigidbody rig in rigidbodies)
+            rig.isKinematic = true;
     }
 
     // Update is called once per frame

@@ -4,27 +4,26 @@ using UnityEngine;
 using System;
 using UnityEngine.SceneManagement;
 
-public enum GameState { Menu, Game, LevelComlete, Gameover }
+public enum GameState { Menu, Game, LevelComplete, Gameover }
 
 public class GameManager : MonoBehaviour
 {
-   public static GameManager instance;
+    public static GameManager instance;
 
-    [Header( "Settings" )]
+    [Header(" Settings ")]
     private GameState gameState;
 
-    [Header( "Actions" )]
-    public static Action<GameState> onGameStateChanged; 
+    [Header(" Actions ")]
+    public static Action<GameState> onGameStateChanged;
 
     private void Awake()
     {
         if (instance == null)
             instance = this;
-        else 
-           Destroy(gameObject);
+        else
+            Destroy(gameObject);
     }
 
-    
     // Start is called before the first frame update
     void Start()
     {
@@ -41,7 +40,6 @@ public class GameManager : MonoBehaviour
     {
         this.gameState = gameState;
         onGameStateChanged?.Invoke(gameState);
-  
     }
 
     public bool IsGameState()
@@ -51,11 +49,12 @@ public class GameManager : MonoBehaviour
 
     public void Retry()
     {
-      SceneManager.LoadScene(0);
+        SceneManager.LoadScene(0);
     }
 
     public void NextLevel()
     {
+        // Tell the level manager to increase the level index
         SceneManager.LoadScene(0);
     }
 }

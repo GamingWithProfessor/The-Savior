@@ -1,11 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    [Header(" Settings")]
+    [Header(" Settings ")]
     [SerializeField] private LayerMask enemiesMask;
     [SerializeField] private float detectionRadius;
     private Vector3 velocity;
@@ -13,13 +12,14 @@ public class Bullet : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Destroy (gameObject, 3);
+        Destroy(gameObject, 3);
     }
 
     // Update is called once per frame
     void Update()
     {
         Move();
+
         CheckForEnemies();
     }
 
@@ -33,12 +33,11 @@ public class Bullet : MonoBehaviour
         this.velocity = velocity;
     }
 
-    public void CheckForEnemies()
+    private void CheckForEnemies()
     {
         Collider[] detectedEnemies = Physics.OverlapSphere(transform.position, detectionRadius, enemiesMask);
+
         foreach (Collider enemyCollider in detectedEnemies)
-        {
             enemyCollider.GetComponent<Enemy>().TakeDamage();
-        }
     }
 }

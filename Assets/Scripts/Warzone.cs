@@ -5,12 +5,12 @@ using UnityEngine.Splines;
 
 public class Warzone : MonoBehaviour
 {
-    [Header ("Elements")]
+    [Header(" Elements ")]
     [SerializeField] private SplineContainer playerSpline;
-
-    [Header ("Settings")]
     [SerializeField] private Transform ikTarget;
     [SerializeField] private SplineAnimate ikSplineAnimate;
+
+    [Header(" Settings ")]
     [SerializeField] private float duration;
     [SerializeField] private float animatorSpeed;
     [SerializeField] private string animationToPlay;
@@ -27,19 +27,19 @@ public class Warzone : MonoBehaviour
         
     }
 
-    public void StartAnimationIKTarget()
+    public void StartAnimatingIKTarget()
     {
-      ikSplineAnimate.Play();
+        ikSplineAnimate.Play();
     }
 
     public Spline GetPlayerSpline()
     {
-      return playerSpline.Spline;
+        return playerSpline.Spline;
     }
 
     public float GetDuration()
     {
-      return duration;
+        return duration;
     }
 
     public float GetAnimatorSpeed()
@@ -54,6 +54,6 @@ public class Warzone : MonoBehaviour
 
     public Transform GetIKTarget()
     {
-      return ikTarget;
+        return ikTarget;
     }
 }

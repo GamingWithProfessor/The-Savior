@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,11 +5,12 @@ using UnityEngine.Animations.Rigging;
 
 public class CharacterIK : MonoBehaviour
 {
-    [SerializeField] public RigBuilder rigBuilder;
+    [Header(" Elements ")]
+    [SerializeField] private RigBuilder rigBuilder;
 
-    [Header ("Constrains")]
-    [SerializeField] private TwoBoneIKConstraint[] twoBoneIKConstraint;
-    [SerializeField] private MultiAimConstraint[] multiAimConstraint;
+    [Header(" Constraints ")]
+    [SerializeField] private TwoBoneIKConstraint[] twoBoneIKConstraints;
+    [SerializeField] private MultiAimConstraint[] multiAimConstraints; 
 
     // Start is called before the first frame update
     void Start()
@@ -24,14 +24,15 @@ public class CharacterIK : MonoBehaviour
         
     }
 
-    public void ConfigureIk(Transform ikTarget)
+    public void ConfigureIK(Transform ikTarget)
     {
+        // Enable the rig builder
         rigBuilder.enabled = true;
 
-        foreach (TwoBoneIKConstraint twoBoneIKConstraint in twoBoneIKConstraint)
+        foreach(TwoBoneIKConstraint twoBoneIKConstraint in twoBoneIKConstraints)
             twoBoneIKConstraint.data.target = ikTarget;
-
-        foreach (MultiAimConstraint multiAimConstraint in multiAimConstraint)
+        
+        foreach(MultiAimConstraint multiAimConstraint in multiAimConstraints)
         {
             WeightedTransformArray weightedTransforms = new WeightedTransformArray();
             weightedTransforms.Add(new WeightedTransform(ikTarget, 1));
@@ -40,16 +41,11 @@ public class CharacterIK : MonoBehaviour
         }
 
         rigBuilder.Build();
-        
     }
 
-     public void DisableIk()
+    public void DisableIK()
     {
+        // Disable the rig builder
         rigBuilder.enabled = false;
-    }
-
-    internal void ConfigureIk(object ikTarget)
-    {
-        throw new NotImplementedException();
     }
 }

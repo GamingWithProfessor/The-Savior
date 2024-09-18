@@ -1,55 +1,51 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class PlayerShooter : MonoBehaviour
 {
-    [Header ("Elements")] 
-    [SerializeField] private GameObject shootingLine;
+    [Header(" Elements ")]
     [SerializeField] private Bullet bulletPrefab;
-    [SerializeField] private Transform bulletsParent;
+    [SerializeField] private GameObject shootingLine;
     [SerializeField] private Transform bulletSpawnPosition;
+    [SerializeField] private Transform bulletsParent;
 
-    [Header("Setting")]
+    [Header(" Settings ")]
     [SerializeField] private float bulletSpeed;
     private bool canShoot;
 
-    void Awake() 
+    // Called before the start method, only once
+    private void Awake()
     {
-        PlayerMovement.onEnterWarzone += EnteredWarzoneCallback;
-        PlayerMovement.onExitWarzone += ExitWarZone;
+        PlayerMovement.onEnteredWarzone += EnteredWarzoneCallback;        
+        PlayerMovement.onExitedWarzone += ExitedWarzoneCallback;
         PlayerMovement.onDied += DiedCallback;
     }
 
-    private void OnDestroy() 
+    private void OnDestroy()
     {
-        PlayerMovement.onEnterWarzone -= EnteredWarzoneCallback;
-        PlayerMovement.onExitWarzone -= ExitWarZone;
+        PlayerMovement.onEnteredWarzone -= EnteredWarzoneCallback;
+        PlayerMovement.onExitedWarzone -= ExitedWarzoneCallback;        
         PlayerMovement.onDied -= DiedCallback;
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        SetShootingVisibility(false);
+        SetShootingLineVisibility(false);
     }
 
     // Update is called once per frame
     void Update()
     {
         if (canShoot)
-        {
             ManageShooting();
-        }
     }
- 
+
     private void ManageShooting()
     {
         if (Input.GetMouseButtonDown(0))
-        {
             Shoot();
-        }
     }
 
     private void Shoot()
@@ -63,24 +59,24 @@ public class PlayerShooter : MonoBehaviour
 
     private void EnteredWarzoneCallback()
     {
-        SetShootingVisibility(true);
+        SetShootingLineVisibility(true);
         canShoot = true;
     }
 
-    private void ExitWarZone()
+    private void ExitedWarzoneCallback()
     {
-        SetShootingVisibility(false);
+        SetShootingLineVisibility(false);
         canShoot = false;
     }
 
-    private void SetShootingVisibility(bool visibility)
+    private void SetShootingLineVisibility(bool visibility)
     {
         shootingLine.SetActive(visibility);
-    } 
+    }
 
     private void DiedCallback()
     {
-        SetShootingVisibility(false);
+        SetShootingLineVisibility(false);
         canShoot = false;
     }
 }

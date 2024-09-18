@@ -1,24 +1,24 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
+
     [Header(" Panels ")]
     [SerializeField] private GameObject menuPanel;
     [SerializeField] private GameObject gamePanel;
     [SerializeField] private GameObject levelCompletePanel;
-    [SerializeField] private GameObject gameOverPanel;
+    [SerializeField] private GameObject gameoverPanel;
 
     private void Awake()
     {
-        GameManager.onGameStateChanged += GameStateChangedCallBack;
+        GameManager.onGameStateChanged += GameStateChangedCallback;
     }
 
-     private void Destroy()
+    private void OnDestroy()
     {
-        GameManager.onGameStateChanged -= GameStateChangedCallBack;
+        GameManager.onGameStateChanged -= GameStateChangedCallback;
     }
 
     // Start is called before the first frame update
@@ -33,45 +33,45 @@ public class UIManager : MonoBehaviour
         
     }
 
-    private void GameStateChangedCallBack(GameState gameState)
+    private void GameStateChangedCallback(GameState gameState)
     {
         switch(gameState)
         {
-        case GameState.Menu:
-            menuPanel.SetActive(true);
-            gamePanel.SetActive(false);
-            levelCompletePanel.SetActive(false);
-            gameOverPanel.SetActive(false);
-            break;
+            case GameState.Menu:
+                menuPanel.SetActive(true);
+                gamePanel.SetActive(false);
+                levelCompletePanel.SetActive(false);
+                gameoverPanel.SetActive(false);
+                break;
 
-        case GameState.Game:
-            menuPanel.SetActive(false);
-            gamePanel.SetActive(true);
-            break;     
+            case GameState.Game:
+                menuPanel.SetActive(false);
+                gamePanel.SetActive(true);
+                break;
 
-        case GameState.Gameover:
-            gamePanel.SetActive(false);
-            gameOverPanel.SetActive(true);
-            break;    
+            case GameState.LevelComplete:
+                gamePanel.SetActive(false);
+                levelCompletePanel.SetActive(true);
+                break;
 
-        case GameState.LevelComlete:
-            gamePanel.SetActive(false);
-            levelCompletePanel.SetActive(true);
-            break;  
+            case GameState.Gameover:
+                gamePanel.SetActive(false);
+                gameoverPanel.SetActive(true);
+                break;
         }
     }
 
-    public void PlayeButtonCallBack()
+    public void PlayButtonCallback()
     {
-        GameManager.instance.SetGameState(GameState.Game);
+        GameManager.instance.SetGameState(GameState.Game);        
     }
 
-    public void RetryButtonCallBack()
+    public void RetryButtonCallback()
     {
         GameManager.instance.Retry();
     }
 
-    public void NextButtonCallBack()
+    public void NextButtonCallback()
     {
         GameManager.instance.NextLevel();
     }

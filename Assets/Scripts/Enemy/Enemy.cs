@@ -8,7 +8,7 @@ public class Enemy : MonoBehaviour
     private State state;
 
     [Header(" Elements ")]
-    [SerializeField] private EnemyShooter enemyshooter;
+    [SerializeField] private EnemyShooter enemyShooter;
     [SerializeField] private CharacterRagdoll characterRagdoll;
     [SerializeField] private CharacterIK characterIK;
     private PlayerMovement playerMovement;
@@ -19,7 +19,7 @@ public class Enemy : MonoBehaviour
         state = State.Alive;
 
         playerMovement = FindObjectOfType<PlayerMovement>();
-        characterIK.ConfigureIk(playerMovement.GetEnemyTarget());
+        characterIK.ConfigureIK(playerMovement.GetEnemyTarget());
     }
 
     // Update is called once per frame
@@ -31,11 +31,11 @@ public class Enemy : MonoBehaviour
     public void TakeDamage()
     {
         if (state == State.Dead)
-        {
-            return;            
-        }
+            return;
+
         Die();
     }
+
     private void Die()
     {
         state = State.Dead;
@@ -45,11 +45,9 @@ public class Enemy : MonoBehaviour
 
     public void ShootAtPlayer()
     {
-       if (state == State.Dead)   
-           return;
+        if (state == State.Dead)
+            return;
 
-        enemyshooter.TryShooting();
+        enemyShooter.TryShooting();
     }
-
-
 }

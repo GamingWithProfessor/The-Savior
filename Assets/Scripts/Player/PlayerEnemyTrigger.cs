@@ -9,23 +9,22 @@ public class PlayerEnemyTrigger : MonoBehaviour
 
     [Header(" Settings ")]
     [SerializeField] private LayerMask enemiesMask;
-    private bool canCheckForShootingEnemies;
     private List<Enemy> currentEnemies = new List<Enemy>();
-    
-
-    // Start is called before the first frame update
+    private bool canCheckForShootingEnemies;
 
     private void Awake()
     {
-        PlayerMovement.onEnterWarzone += EnterWarzoneCallback;
-        PlayerMovement.onExitWarzone += ExitWarzoneCallback;
+        PlayerMovement.onEnteredWarzone += EnteredWarzoneCallback;
+        PlayerMovement.onExitedWarzone += ExitedWarzoneCallback;
     }
 
     private void OnDestroy()
     {
-        PlayerMovement.onEnterWarzone -= EnterWarzoneCallback;
-        PlayerMovement.onExitWarzone -= ExitWarzoneCallback;
+        PlayerMovement.onEnteredWarzone -= EnteredWarzoneCallback;   
+        PlayerMovement.onExitedWarzone -= ExitedWarzoneCallback;
     }
+
+    // Start is called before the first frame update
     void Start()
     {
         
@@ -35,24 +34,22 @@ public class PlayerEnemyTrigger : MonoBehaviour
     void Update()
     {
         if (canCheckForShootingEnemies)
-        {
             CheckForShootingEnemies();
-        }
     }
 
-    private void EnterWarzoneCallback()
+    private void EnteredWarzoneCallback()
     {
         canCheckForShootingEnemies = true;
     }
 
-    private void ExitWarzoneCallback()
+    private void ExitedWarzoneCallback()
     {
         canCheckForShootingEnemies = false;
     }
 
     private void CheckForShootingEnemies()
     {
-        // world space ray origin
+        // World Space ray origin
         Vector3 rayOrigin = shootingLine.transform.TransformPoint(shootingLine.GetPosition(0));
         Vector3 worldSpaceSecondPoint = shootingLine.transform.TransformPoint(shootingLine.GetPosition(1));
 
@@ -66,38 +63,37 @@ public class PlayerEnemyTrigger : MonoBehaviour
             Enemy currentEnemy = hits[i].collider.GetComponent<Enemy>();
 
             if (!currentEnemies.Contains(currentEnemy))
-            {
                 currentEnemies.Add(currentEnemy);
-            }
-
-            Debug.Log(hits[i].collider.name);            
         }
+
+        // We have a list of current enemies, enemies we've detected
+        // For each current enemy in the list, check if we have a raycast hit for that enemy
+        // If that's not the case, it means that the enemy has exited the line of sight of the player
 
         List<Enemy> enemiesToRemove = new List<Enemy>();
 
-        foreach (Enemy enemy in currentEnemies)
+        foreach(Enemy enemy in currentEnemies)
         {
             bool enemyFound = false;
 
             for (int i = 0; i < hits.Length; i++)
             {
-                if (hits[i].collider.GetComponent<Enemy>() == enemy)
+                if(hits[i].collider.GetComponent<Enemy>() == enemy)
                 {
                     enemyFound = true;
                     break;
                 }
             }
 
-            if (!enemyFound)
+            if(!enemyFound)
             {
                 enemy.ShootAtPlayer();
-                enemiesToRemove.Add(enemy); 
+                enemiesToRemove.Add(enemy);
             }
         }
 
+        // Remove processed enemies from the current enemies list
         foreach (Enemy enemy in enemiesToRemove)
-        {
             currentEnemies.Remove(enemy);
-        }
     }
 }

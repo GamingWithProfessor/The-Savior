@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyBullet : MonoBehaviour
 {
-    [Header(" Settings")]
+    [Header(" Settings ")]
     [SerializeField] private LayerMask playerMask;
     [SerializeField] private float detectionRadius;
     private Vector3 velocity;
@@ -15,6 +15,7 @@ public class EnemyBullet : MonoBehaviour
         
     }
 
+    // Update is called once per frame
     void Update()
     {
         Move();
@@ -31,12 +32,12 @@ public class EnemyBullet : MonoBehaviour
         this.velocity = velocity;
     }
 
-    public void CheckForPlayer()
+    private void CheckForPlayer()
     {
         Collider[] detectedPlayer = Physics.OverlapSphere(transform.position, detectionRadius, playerMask);
+
         foreach (Collider playerCollider in detectedPlayer)
-        {
             playerCollider.GetComponent<PlayerMovement>().TakeDamage();
-        }
     }
+
 }

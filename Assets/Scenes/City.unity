@@ -207,7 +207,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2046304019}
         m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-        m_MethodName: PlayeButtonCallBack
+        m_MethodName: PlayButtonCallback
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1276,7 +1276,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 429003036}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fff0960ef4ea6e04eac66b4a7fd2189d, type: 3}
   m_Name: 
@@ -1904,7 +1904,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2046304019}
         m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-        m_MethodName: RetryButtonCallBack
+        m_MethodName: RetryButtonCallback
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2779,7 +2779,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2046304019}
         m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-        m_MethodName: NextButtonCallBack
+        m_MethodName: NextButtonCallback
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4992,7 +4992,7 @@ GameObject:
   - component: {fileID: 1867205782}
   m_Layer: 0
   m_Name: Warzone Trigger
-  m_TagString: WarZoneEnter
+  m_TagString: WarzoneEnter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5300,13 +5300,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da600a4869b8c7c4bab35db2faad014b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerAnimator: {fileID: 1950442813}
+  playerIK: {fileID: 1950442814}
+  characterRagdoll: {fileID: 1950442819}
   moveSpeed: 5
   slowMoScale: 0.7
   enemyTarget: {fileID: 1250140023921161660}
-  Framerate: 120
-  playeranimator: {fileID: 1950442813}
-  playerIK: {fileID: 1950442814}
-  characterRagdoll: {fileID: 1950442819}
 --- !u!114 &1950442813
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5333,10 +5332,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rigBuilder: {fileID: 3056082739620863906}
-  twoBoneIKConstraint:
+  twoBoneIKConstraints:
   - {fileID: 704241721}
   - {fileID: 1529539925}
-  multiAimConstraint:
+  multiAimConstraints:
   - {fileID: 1007768963}
   - {fileID: 874807561}
   - {fileID: 2108564776}
@@ -5365,10 +5364,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e42edc359bb1c0749b906270a8593ccf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shootingLine: {fileID: 1490579134}
   bulletPrefab: {fileID: 2291086826328906564, guid: 409d58f46ca46b44cae7739480de7d33, type: 3}
-  bulletsParent: {fileID: 964489572}
+  shootingLine: {fileID: 1490579134}
   bulletSpawnPosition: {fileID: 565810377}
+  bulletsParent: {fileID: 964489572}
   bulletSpeed: 10
 --- !u!114 &1950442817
 MonoBehaviour:
@@ -5671,7 +5670,7 @@ MonoBehaviour:
   menuPanel: {fileID: 1622236276}
   gamePanel: {fileID: 1440862057}
   levelCompletePanel: {fileID: 920943809}
-  gameOverPanel: {fileID: 1399960031}
+  gameoverPanel: {fileID: 1399960031}
 --- !u!1 &2067113763
 GameObject:
   m_ObjectHideFlags: 0
@@ -9719,7 +9718,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 872d3f4fc202b6f40843a2f6dd7d584c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyshooter: {fileID: 7589428879240462399}
+  enemyShooter: {fileID: 7589428879240462399}
   characterRagdoll: {fileID: 7589428879240462396}
   characterIK: {fileID: 7589428879240462397}
 --- !u!114 &7589428879240462396
@@ -9762,10 +9761,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rigBuilder: {fileID: 429003039}
-  twoBoneIKConstraint:
+  twoBoneIKConstraints:
   - {fileID: 1683075083}
   - {fileID: 424751889}
-  multiAimConstraint:
+  multiAimConstraints:
   - {fileID: 232681089}
   - {fileID: 1064518341}
   - {fileID: 1455199352}
@@ -9803,7 +9802,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: -3042255059536050403, guid: 975ac0091a5916a4dab3b342f82f912d, type: 3}
-  bulletParent: {fileID: 964489572}
+  bulletsParent: {fileID: 964489572}
   bulletSpawnPoint: {fileID: 1373026627}
   bulletSpeed: 30
 --- !u!1 &7611114263580811289

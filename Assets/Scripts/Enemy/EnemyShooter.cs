@@ -6,7 +6,7 @@ public class EnemyShooter : MonoBehaviour
 {
     [Header(" Elements ")]
     [SerializeField] private EnemyBullet bulletPrefab;
-    [SerializeField] private Transform bulletParent;
+    [SerializeField] private Transform bulletsParent;
     [SerializeField] private Transform bulletSpawnPoint;
 
     [Header(" Settings ")]
@@ -28,18 +28,18 @@ public class EnemyShooter : MonoBehaviour
     public void TryShooting()
     {
         if (hasShot)
-            return; 
+            return;
 
-            hasShot = true;
+        hasShot = true;
 
         Invoke("Shoot", .5f);
     }
 
-    public void Shoot()
+    private void Shoot()
     {
         Vector3 velocity = bulletSpeed * bulletSpawnPoint.right;
 
-        EnemyBullet bulletInstance = Instantiate(bulletPrefab, bulletSpawnPoint.position, Quaternion.identity, bulletParent);
+        EnemyBullet bulletInstance = Instantiate(bulletPrefab, bulletSpawnPoint.position, Quaternion.identity, bulletsParent);
         bulletInstance.Configure(velocity);
     }
 }

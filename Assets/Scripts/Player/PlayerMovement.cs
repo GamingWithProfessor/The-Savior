@@ -1,179 +1,173 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Splines;
+using System;
 
 public class PlayerMovement : MonoBehaviour
-{ enum State {Idle, Run, Warzone, Dead }
+{
+    enum State { Idle, Run, Warzone, Dead }
 
+    [Header(" Elements ")]
+    [SerializeField] private PlayerAnimator playerAnimator;
+    [SerializeField] private CharacterIK playerIK;
+    [SerializeField] private CharacterRagdoll characterRagdoll;
 
-    [Header ("Settings")]
+    [Header(" Settings ")]
     [SerializeField] private float moveSpeed;
     [SerializeField] private float slowMoScale;
     [SerializeField] private Transform enemyTarget;
-
-    [Header ("Testing")]
-    [SerializeField] private int Framerate;
-    // Start is called before the first frame update
-
-    [Header ("Elemets")]
-    [SerializeField] private PlayerAnimator playeranimator;
-    [SerializeField] private CharacterIK playerIK;
-    [SerializeField] private CharacterRagdoll characterRagdoll;
-    
-
     private State state;
     private Warzone currentWarzone;
 
-    [Header ("Spline Settings")]
-    private float warZoneTimer;
+    [Header(" Spline Settings ")]
+    private float warzoneTimer;
 
-    [Header ("Actions")]
-    public static Action onEnterWarzone;
-    public static Action onExitWarzone;
-
+    [Header(" Actions ")]
+    public static Action onEnteredWarzone;
+    public static Action onExitedWarzone;
     public static Action onDied;
 
     private void Awake()
     {
-        GameManager.onGameStateChanged += GameStateChangedCallBack;
+        GameManager.onGameStateChanged += GameStateChangedCallback;
     }
 
-     private void Destroy()
+    private void OnDestroy()
     {
-        GameManager.onGameStateChanged -= GameStateChangedCallBack;
+        GameManager.onGameStateChanged -= GameStateChangedCallback;
     }
 
+    // Start is called before the first frame update
     void Start()
     {
-        Application.targetFrameRate = Framerate;
-        state = State.Idle;
+        Application.targetFrameRate = 60;
 
+        state = State.Idle;
     }
 
     // Update is called once per frame
     void Update()
     {
-      if(GameManager.instance.IsGameState())
-      ManageState();
-       
+        if(GameManager.instance.IsGameState())
+            ManageState();
     }
 
-    private void GameStateChangedCallBack(GameState gameState)
-    {
-        switch(gameState)
-        {
 
-        case GameState.Game:
-             StartRunning();  
-             break;  
+    private void GameStateChangedCallback(GameState gameState)
+    {
+        switch (gameState)
+        {
+            case GameState.Game:
+                StartRunning();
+                break;
         }
     }
 
-   private void ManageState()
-   {
-     switch (state)
-     {
-        case State.Idle:
-                break;
+    private void ManageState()
+    {
+        switch(state)
+        {
+            case State.Idle:
+                    break;
 
-        case State.Run:
-            Move();
-                break;
+            case State.Run:
+                Move();
+                    break;
 
-        case State.Warzone:
-            ManageWarZoneState();
+            case State.Warzone:
+                ManageWarzoneState();
                 break;
-     }
-   }
+        }
+    }
 
     private void StartRunning()
     {
         state = State.Run;
-        playeranimator.PlayRunAnimation();
+        playerAnimator.PlayRunAnimation();
     }
 
-    private void Move ()
+    private void Move()
     {
-      transform.position += transform.right * moveSpeed * Time.deltaTime;
+        transform.position += Vector3.right * moveSpeed * Time.deltaTime;
     }
 
-    public void EnteredWarZoreCallBack(Warzone warzone)
+    public void EnteredWarzoneCallback(Warzone warzone)
     {
-      if (currentWarzone != null)
-      return;
+        if (currentWarzone != null)
+            return;
 
-      state = State.Warzone;
-      
-      currentWarzone = warzone;
+        state = State.Warzone;
+        currentWarzone = warzone;
 
-      currentWarzone.StartAnimationIKTarget();
-      warZoneTimer = 0;
-      playeranimator.Play(currentWarzone.GetAnimationToPlay(), currentWarzone.GetAnimatorSpeed());
+        currentWarzone.StartAnimatingIKTarget();
 
-      Time.timeScale = slowMoScale;
-      Time.fixedDeltaTime = slowMoScale / 50;
-      
+        warzoneTimer = 0;
 
-      playerIK.ConfigureIk(currentWarzone.GetIKTarget());
+        playerAnimator.Play(currentWarzone.GetAnimationToPlay(), currentWarzone.GetAnimatorSpeed());
 
-      onEnterWarzone?.Invoke();
-      
-      Debug.Log("Entered Warzone");
+        Time.timeScale = slowMoScale;
+        Time.fixedDeltaTime = slowMoScale / 50;
+
+        playerIK.ConfigureIK(currentWarzone.GetIKTarget());
+
+        onEnteredWarzone?.Invoke();
+
+        Debug.Log("Entered Warzone ! ");
     }
 
-    public void ManageWarZoneState()
+    private void ManageWarzoneState()
     {
-      if (currentWarzone == null) return;
-       warZoneTimer +=Time.deltaTime;
-       float splinePercent = warZoneTimer/currentWarzone.GetDuration();
-       transform.position = currentWarzone.GetPlayerSpline().EvaluatePosition(splinePercent);
+        warzoneTimer += Time.deltaTime;
 
-       if (splinePercent >= 1)
-       ExitWarZone();
+        float splinePercent = warzoneTimer / currentWarzone.GetDuration();
+        transform.position = currentWarzone.GetPlayerSpline().EvaluatePosition(splinePercent);
+
+        if (splinePercent >= 1)
+            ExitWarzone();
     }
-
-    private void ExitWarZone()
+    
+    private void ExitWarzone()
     {
-      state = State.Run;
-      currentWarzone = null;
+        currentWarzone = null;
 
-      playeranimator.Play("Run", 1);
+        state = State.Run;
+        playerAnimator.Play("Run", 1);
 
-      Time.timeScale = 1;
-      Time.fixedDeltaTime = 1f / 50;
+        Time.timeScale = 1;
+        Time.fixedDeltaTime = 1f / 50;
 
-      onExitWarzone?.Invoke();
+        playerIK.DisableIK();
 
-      playerIK.DisableIk();
-
+        onExitedWarzone?.Invoke();
     }
 
     public Transform GetEnemyTarget()
     {
-      return enemyTarget;
+        return enemyTarget;
     }
 
     public void TakeDamage()
     {
-      state = State.Dead;
-      characterRagdoll.Ragdollify();
+        state = State.Dead;
 
-      Time.timeScale = 1;
-      Time.fixedDeltaTime = 1f / 50;
-      
-      onDied?.Invoke(); 
+        characterRagdoll.Ragdollify();
 
-      GameManager.instance.SetGameState(GameState.Gameover);
+        Time.timeScale = 1;
+        Time.fixedDeltaTime = 1f / 50;
+
+        onDied?.Invoke();
+
+        GameManager.instance.SetGameState(GameState.Gameover);
     }
 
     public void HitFinishLine()
     {
-       state = State.Idle;
-       playeranimator.PlayIdleAnimation();
+        Debug.Log("Hit finish Line");
 
-       GameManager.instance.SetGameState(GameState.LevelComlete);
+        state = State.Idle;
+        playerAnimator.PlayIdleAnimation();
+
+        GameManager.instance.SetGameState(GameState.LevelComplete);
     }
 }

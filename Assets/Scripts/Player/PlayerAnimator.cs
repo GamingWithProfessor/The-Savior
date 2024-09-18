@@ -1,12 +1,12 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerAnimator : MonoBehaviour
 {
-    [Header ("Elements")]
+    [Header(" Elements ")]
     [SerializeField] private Animator animator;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,24 +21,23 @@ public class PlayerAnimator : MonoBehaviour
 
     public void PlayRunAnimation()
     {
-       Play ("Run");
-      //animator.Play ("Run");
-    }   
+        Play("Run");
+        //animator.Play("Run");
+    }
 
     public void PlayIdleAnimation()
     {
-      Play("Idle");
-    } 
+        Play("Idle");
+    }
 
     public void Play(string animationName)
     {
-      animator.Play(animationName);
+        animator.Play(animationName);
     }
 
     public void Play(string animationName, float animatorSpeed)
     {
-      animator.speed = animatorSpeed;
-      Play(animationName);
+        animator.speed = animatorSpeed;
+        Play(animationName);
     }
-  
 }
