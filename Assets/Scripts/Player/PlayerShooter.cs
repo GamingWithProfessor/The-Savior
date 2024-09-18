@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class PlayerShooter : MonoBehaviour
 {
@@ -13,6 +14,9 @@ public class PlayerShooter : MonoBehaviour
     [Header(" Settings ")]
     [SerializeField] private float bulletSpeed;
     private bool canShoot;
+
+    [Header ( "Action" )]
+    public static Action onShot;
 
     // Called before the start method, only once
     private void Awake()
@@ -39,12 +43,12 @@ public class PlayerShooter : MonoBehaviour
     void Update()
     {
         if (canShoot)
-            ManageShooting();
+        ManageShooting();
     }
 
     private void ManageShooting()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && UIBulletsContainer.instance.CanShoot())
             Shoot();
     }
 
@@ -55,6 +59,8 @@ public class PlayerShooter : MonoBehaviour
 
         Bullet bulletInstance = Instantiate(bulletPrefab, bulletSpawnPosition.position, Quaternion.identity, bulletsParent);
         bulletInstance.Configure(direction * bulletSpeed);
+
+        onShot?.Invoke();
     }
 
     private void EnteredWarzoneCallback()
