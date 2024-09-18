@@ -36,6 +36,16 @@ public class PlayerMovement : MonoBehaviour
 
     public static Action onDied;
 
+    private void Awake()
+    {
+        GameManager.onGameStateChanged += GameStateChangedCallBack;
+    }
+
+     private void Destroy()
+    {
+        GameManager.onGameStateChanged -= GameStateChangedCallBack;
+    }
+
     void Start()
     {
         Application.targetFrameRate = Framerate;
@@ -46,11 +56,20 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       if (Input.GetKeyDown(KeyCode.Escape))
-       StartRunning();
-
-       ManageState();
+      if(GameManager.instance.IsGameState())
+      ManageState();
        
+    }
+
+    private void GameStateChangedCallBack(GameState gameState)
+    {
+        switch(gameState)
+        {
+
+        case GameState.Game:
+             StartRunning();  
+             break;  
+        }
     }
 
    private void ManageState()
@@ -146,5 +165,15 @@ public class PlayerMovement : MonoBehaviour
       Time.fixedDeltaTime = 1f / 50;
       
       onDied?.Invoke(); 
+
+      GameManager.instance.SetGameState(GameState.Gameover);
+    }
+
+    public void HitFinishLine()
+    {
+       state = State.Idle;
+       playeranimator.PlayIdleAnimation();
+
+       GameManager.instance.SetGameState(GameState.LevelComlete);
     }
 }

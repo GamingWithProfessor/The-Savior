@@ -19,6 +19,7 @@ public class PlayerDetection : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (GameManager.instance.IsGameState())
         DetectStuff();
     }
 
@@ -27,14 +28,23 @@ public class PlayerDetection : MonoBehaviour
         Collider[] detectedObjects = Physics.OverlapSphere(transform.position, detectionRadius);
 
        foreach (Collider collider in detectedObjects)
-       if (collider.CompareTag("WarZoneEnter"))
-       EnteredWarZoreCallBack(collider);
+       {
+        if (collider.CompareTag("WarZoneEnter"))
+             EnteredWarZoreCallBack(collider);
+       else if (collider.CompareTag("Finish"))
+               HitFinishLine();
+       }
     }
 
     private void EnteredWarZoreCallBack(Collider warzoneTriggerCollider)
     {
       Warzone warzone = warzoneTriggerCollider.GetComponentInParent<Warzone>();
       playerMovement.EnteredWarZoreCallBack (warzone);
+    }
+
+    private void HitFinishLine()
+    {
+        playerMovement.HitFinishLine();
     }
 
     private void OnDrawGizmos()

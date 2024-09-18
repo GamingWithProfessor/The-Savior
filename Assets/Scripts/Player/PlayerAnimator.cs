@@ -23,7 +23,12 @@ public class PlayerAnimator : MonoBehaviour
     {
        Play ("Run");
       //animator.Play ("Run");
-    }    
+    }   
+
+    public void PlayIdleAnimation()
+    {
+      Play("Idle");
+    } 
 
     public void Play(string animationName)
     {
