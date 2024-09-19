@@ -125,9 +125,24 @@ public class PlayerMovement : MonoBehaviour
         float splinePercent = Mathf.Clamp01(warzoneTimer / currentWarzone.GetDuration());
         transform.position = currentWarzone.GetPlayerSpline().EvaluatePosition(splinePercent);
 
-        if (splinePercent >= 1)
-            ExitWarzone();
+        if (splinePercent >= 1)   
+            TryExitWarzone();
     }
+
+    private void TryExitWarzone()
+    {
+        Warzone nextWarzone = currentWarzone.GetNextWarzone();
+
+        if (nextWarzone == null)
+            ExitWarzone();
+        else
+        {
+            currentWarzone = null;
+            EnteredWarzoneCallback(nextWarzone);
+        }
+    }
+
+
     
     private void ExitWarzone()
     {
