@@ -44,6 +44,8 @@ public class PlayerMovement : MonoBehaviour
         Application.targetFrameRate = 60;
 
         state = State.Idle;
+
+        transform.position = CheckpointManager.instance.GetCheckpointPosition();
     }
 
     // Update is called once per frame
@@ -120,7 +122,7 @@ public class PlayerMovement : MonoBehaviour
     {
         warzoneTimer += Time.deltaTime;
 
-        float splinePercent = warzoneTimer / currentWarzone.GetDuration();
+        float splinePercent = Mathf.Clamp01(warzoneTimer / currentWarzone.GetDuration());
         transform.position = currentWarzone.GetPlayerSpline().EvaluatePosition(splinePercent);
 
         if (splinePercent >= 1)
@@ -169,5 +171,10 @@ public class PlayerMovement : MonoBehaviour
         playerAnimator.PlayIdleAnimation();
 
         GameManager.instance.SetGameState(GameState.LevelComplete);
+    }
+
+    public Warzone GetCurrentWarzone()
+    {
+        return currentWarzone;
     }
 }

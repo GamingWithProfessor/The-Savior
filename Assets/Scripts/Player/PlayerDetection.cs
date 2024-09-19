@@ -34,6 +34,11 @@ public class PlayerDetection : MonoBehaviour
                 EnteredWarzoneCallback(collider);
             else if (collider.CompareTag("Finish"))
                 HitFinishLine();
+
+            if(collider.TryGetComponent (out Checkpoint checkpoint))
+            {
+                checkpoint.Interact();
+            }
             
         }
     }

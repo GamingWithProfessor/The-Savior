@@ -59,13 +59,22 @@ private int bulletsShot;
     }
 
     private void EnteredWarZoneCallBack()
-    {
+    {  
       bulletsParent.gameObject.SetActive(true);
     }
 
     private void ExitedWarZoneCallBack()
     {
-      bulletsParent.gameObject.SetActive(false);
+      bulletsParent.gameObject.SetActive(false);  
+      Reload();
+    }
+
+    private void Reload()
+    {
+        bulletsShot = 0;
+
+        for (int i = 0; i < bulletsParent.childCount; i++)
+        bulletsParent.GetChild(i).GetComponent<Image>().color = activeColor;
     }
 
     public bool CanShoot()
