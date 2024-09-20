@@ -3484,9 +3484,10 @@ MonoBehaviour:
   ikTarget: {fileID: 7883112269564622157}
   newPlayerSpline: {fileID: 3509540658379047744}
   ikSplineFollower: {fileID: 6798796184582921277}
-  duration: 2.5
-  animatorSpeed: 0.4
+  duration: 1
+  animatorSpeed: 1
   animationToPlay: 'Running Forward Flip '
+  nextWarzone: {fileID: 0}
 --- !u!1 &4241005821106614268
 GameObject:
   m_ObjectHideFlags: 0
@@ -5409,9 +5410,10 @@ MonoBehaviour:
   ikTarget: {fileID: 6784678747008267102}
   newPlayerSpline: {fileID: 5614266891532270721}
   ikSplineFollower: {fileID: 1741946620703018519}
-  duration: 2.5
-  animatorSpeed: 0.4
+  duration: 1
+  animatorSpeed: 1
   animationToPlay: 'Running Forward Flip '
+  nextWarzone: {fileID: 0}
 --- !u!1 &6761591603552581997
 GameObject:
   m_ObjectHideFlags: 0

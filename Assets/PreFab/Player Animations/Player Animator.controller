@@ -16,14 +16,17 @@ AnimatorStateMachine:
     m_State: {fileID: -3776979565362525832}
     m_Position: {x: 300, y: 80, z: 0}
   - serializedVersion: 1
-    m_State: {fileID: -5662928916158409712}
-    m_Position: {x: 300, y: -120, z: 0}
+    m_State: {fileID: 2907464828396438300}
+    m_Position: {x: 300, y: 30, z: 0}
   - serializedVersion: 1
-    m_State: {fileID: 1791171133958840428}
+    m_State: {fileID: 1338421653635532288}
     m_Position: {x: 300, y: -70, z: 0}
   - serializedVersion: 1
-    m_State: {fileID: 2907464828396438300}
-    m_Position: {x: 300, y: 10, z: 0}
+    m_State: {fileID: -1046914466816751730}
+    m_Position: {x: 300, y: -20, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: -5110815489904522264}
+    m_Position: {x: 300, y: -120, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -34,14 +37,14 @@ AnimatorStateMachine:
   m_ExitPosition: {x: 800, y: 120, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
   m_DefaultState: {fileID: 6592204429751799011}
---- !u!1102 &-5662928916158409712
+--- !u!1102 &-5110815489904522264
 AnimatorState:
   serializedVersion: 6
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Big Jump
+  m_Name: Running Slide
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -54,7 +57,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 4111566ceb551504abe456d13398ce35, type: 2}
+  m_Motion: {fileID: 7400000, guid: 5e6d186b59014fa41b9e0e8761c01387, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -86,6 +89,32 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
+--- !u!1102 &-1046914466816751730
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Backflip
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Transitions: []
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 0
+  m_Motion: {fileID: 7400000, guid: 9fbc5fdab3863c944a3aa8280cfb849b, type: 2}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: 
 --- !u!91 &9100000
 AnimatorController:
   m_ObjectHideFlags: 0
@@ -108,14 +137,14 @@ AnimatorController:
     m_IKPass: 0
     m_SyncedLayerAffectsTiming: 0
     m_Controller: {fileID: 9100000}
---- !u!1102 &1791171133958840428
+--- !u!1102 &1338421653635532288
 AnimatorState:
   serializedVersion: 6
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Front Flip
+  m_Name: Falling Idle
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -128,7 +157,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: a51119b3fbe84f0468bc63b1af0e2a22, type: 2}
+  m_Motion: {fileID: 7400000, guid: e72a8db4f9a750c45b85f2cd9e635ea5, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
