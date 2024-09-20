@@ -38,8 +38,7 @@ public class PlayerDetection : MonoBehaviour
             if(collider.TryGetComponent (out Checkpoint checkpoint))
             {
                 checkpoint.Interact();
-            }
-            
+            }            
         }
     }
 
